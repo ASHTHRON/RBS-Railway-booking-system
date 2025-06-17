@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - Railway Booking System</title>
+    <link rel="stylesheet" href="register.css" />
+</head>
+<body>
+    <div class="logo-container">
+        <img src="img/train logo.jpg" alt="RBS Logo" />
+        <div class="logo-text">RBS</div>
+    </div>
+    <div class="register-container">
+        <form class="register-form" id="registerForm">
+            <h2>Register</h2>
+            <label for="name">Name / Username</label>
+            <input type="text" id="name" name="name" required />
+
+        
+
+            <fieldset>
+                <legend>Gender</legend>
+                <label><input type="radio" name="gender" value="male" required /> Male</label>
+                <label><input type="radio" name="gender" value="female" required /> Female</label>
+            </fieldset>
+
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required />
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required />
+
+            <label class="terms">
+                <input type="checkbox" id="terms" name="terms" required />
+                I agree to the Terms and Conditions
+            </label>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </div>
+    <script src="register.script.js"></script>
+</body>
+</html>

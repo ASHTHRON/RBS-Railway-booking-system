@@ -1,0 +1,85 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('img/train background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #f9fbfc;
+}
+
+.logo-container {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    user-select: none;
+}
+
+.result-container {
+    max-width: 900px;
+    margin: 80px auto;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: none;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.result-container:hover {
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.5);
+}
+
+.train-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.train-box {
+    background: #e0f0ff;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    color: #003366;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.train-box:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.train-name {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #004080;
+}
+
+.train-details {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #002244;
+}
+
+.train-price {
+    font-size: 16px;
+    color: #0056b3;
+}

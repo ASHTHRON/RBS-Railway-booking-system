@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Booking - Railway Booking System</title>
+    <link rel="stylesheet" href="booking.css" />
+</head>
+<body>
+    <div class="logo-container">
+        <img src="img/train logo.jpg" alt="RBS Logo" />
+        <div class="logo-text">RBS</div>
+    </div>
+    <div class="booking-container">
+<form class="search-bar" action="result.html" method="GET">
+            <div class="search-item">
+                <label for="from">From</label>
+                <select id="from" name="from" required>
+                    <option value="NDLS">New Delhi (NDLS)</option>
+                    <option value="BCT">Mumbai (BCT)</option>
+                    <option value="HWH">Howrah Jn (HWH)</option>
+                    <option value="MAS">Chennai (MAS)</option>
+                </select>
+            </div>
+            <div class="search-item">
+                <label for="to">To</label>
+                <select id="to" name="to" required>
+                    <option value="HWH">Howrah Jn (HWH)</option>
+                    <option value="NDLS">New Delhi (NDLS)</option>
+                    <option value="BCT">Mumbai (BCT)</option>
+                    <option value="MAS">Chennai (MAS)</option>
+                </select>
+            </div>
+            <div class="search-item">
+                <label for="date">Departure Date</label>
+                <input type="date" id="date" name="date" required />
+            </div>
+            <button type="submit" class="search-btn">SEARCH</button>
+        </form>
+
+        <div class="filters">
+<div class="filter-group">
+    <div class="filter-title">Class</div>
+    <label><input type="checkbox" name="class" value="SL" /> SL</label>
+    <label><input type="checkbox" name="class" value="3A" /> 3A</label>
+    <label><input type="checkbox" name="class" value="2A" /> 2A</label>
+    <label><input type="checkbox" name="class" value="1A" /> 1A</label>
+    <label><input type="checkbox" name="class" value="economy" /> Economy</label>
+</div>
+            <div class="filter-group">
+                <div class="filter-title">Quota</div>
+                <label><input type="radio" name="quota" value="general" checked /> General</label>
+                <label><input type="radio" name="quota" value="tatkal" /> Tatkal</label>
+                <label><input type="radio" name="quota" value="lower_berth" /> Lower Berth</label>
+                <label><input type="radio" name="quota" value="ladies" /> Ladies</label>
+            </div>
+            <div class="filter-group">
+                <div class="filter-title">Departure from</div>
+                <div class="time-buttons">
+                    <button type="button" class="time-btn">00:00 - 06:00<br/><small>Early Morning</small></button>
+                    <button type="button" class="time-btn">06:00 - 12:00<br/><small>Morning</small></button>
+                    <button type="button" class="time-btn">12:00 - 18:00<br/><small>Mid Day</small></button>
+                    <button type="button" class="time-btn">18:00 - 24:00<br/><small>Night</small></button>
+                </div>
+                <div class="more-filters">MORE FILTERS ▼</div>
+            </div>
+        </div>
+
+        <div class="date-selector">
+            <button class="date-btn unavailable">Mon, 23 Jun<br/><span>Filling Fast</span></button>
+            <button class="date-btn available">Tue, 24 Jun<br/><span>Available</span></button>
+            <button class="date-btn available">Wed, 25 Jun<br/><span>Available</span></button>
+            <button class="date-btn selected">Thu, 26 Jun<br/><span>Filling Fast</span></button>
+            <button class="date-btn unavailable">Fri, 27 Jun<br/><span>Filling Fast</span></button>
+            <button class="date-btn available">Sat, 28 Jun<br/><span>Available</span></button>
+            <button class="date-btn unavailable">Sun, 29 Jun<br/><span>Filling Fast</span></button>
+        </div>
+
+        <div class="sort-toggle">
+            <div class="sort-options">
+                <button class="sort-btn active">DEPARTURE TIME</button>
+                <button class="sort-btn">ARRIVAL TIME</button>
+                <button class="sort-btn">DURATION</button>
+                <button class="sort-btn">NAME</button>
+            </div>
+            <div class="toggle-confirmed">
+                <label>
+                    Show trains with confirmed seats
+                    <input type="checkbox" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
