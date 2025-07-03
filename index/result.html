@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Available Trains - Railway Booking System</title>
+    <link rel="stylesheet" href="result.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="invisible-container"></div>
+      <div class="logo-container">
+        <img src="img/train logo.jpg" alt="RBS Logo" />
+        <div class="logo-text">RBS</div>
+    </div>
+    <div class="results-container">
+        <h2>Available Trains</h2>
+        <div id="train-list"></div>
+    </div>
+
+    <script>
+        // Sample train data - in real app, this might come from server or API
+        const trains = [
+            {
+                name: "Rajdhani Express",
+                from: "New Delhi (NDLS)",
+                to: "Mumbai (BCT)",
+                departure: "10:00 AM",
+                classes: ["SL", "3A", "2A", "1A", "Economy"],
+                prices: {
+                    "SL": 1000,
+                    "3A": 1400,
+                    "2A": 1500,
+                    "1A": 2000,
+                    "Economy": 800
+                }
+            },
+            {
+                name: "Shatabdi Express",
+                from: "Mumbai (BCT)",
+                to: "Chennai (MAS)",
+                departure: "14:30 PM",
+                classes: ["SL", "3A", "2A", "1A"],
+                prices: {
+                    "SL": 900,
+                    "3A": 1100,
+                    "2A": 1200,
+                    "1A": 1600
+                }
+            },
+            {
+                name: "Duronto Express",
+                from: "Howrah Jn (HWH)",
+                to: "New Delhi (NDLS)",
+                departure: "18:45 PM",
+                classes: ["3A", "2A", "1A"],
+                prices: {
+                    "3A": 1600,
+                    "2A": 1800,
+                    "1A": 2200
+                }
+            },
+            {
+                name: "Garib Rath Express",
+                from: "Chennai (MAS)",
+                to: "Howrah Jn (HWH)",
+                departure: "09:00 AM",
+                classes: ["SL", "3A", "2A"],
+                prices: {
+                    "SL": 900,
+                    "3A": 1000,
+                    "2A": 1100
+                }
+            }
+        ];
+
+        // Utility to get query parameters as object
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const obj = {};
+            for (const [key, value] of params.entries()) {
+                if (obj[key]) {
+                    if (Array.isArray(obj[key])) {
+                        obj[key].push(value);
+                    } else {
+                        obj[key] = [obj[key], value];
+                    }
+                } else {
+                    obj[key] = value;
+                }
+            }
+            return obj;
+        }
+
+        // Render trains filtered by selected classes
+        function renderTrains() {
+            const params = getQueryParams();
+            let selectedClasses = params['class'];
+            if (!selectedClasses) {
+                // If no class selected, show all classes
+                selectedClasses = [];
+                trains.forEach(train => {
+                    train.classes.forEach(cls => {
+                        if (!selectedClasses.includes(cls)) {
+                            selectedClasses.push(cls);
+                        }
+                    });
+                });
+            } else if (!Array.isArray(selectedClasses)) {
+                selectedClasses = [selectedClasses];
+            }
+
+            const trainListDiv = document.getElementById('train-list');
+            trainListDiv.innerHTML = '';
+
+            // Filter trains by selected classes
+            const filteredTrains = trains.filter(train => {
+                return train.classes.some(c => selectedClasses.includes(c));
+            });
+
+            if (filteredTrains.length === 0) {
+                trainListDiv.innerHTML = '<p>No trains available for selected class(es).</p>';
+                return;
+            }
+
+            filteredTrains.forEach(train => {
+                // For each train, show only the selected classes it has
+                const availableClasses = train.classes.filter(c => selectedClasses.includes(c));
+
+                availableClasses.forEach(cls => {
+                    const trainDiv = document.createElement('div');
+                    trainDiv.className = 'train-item';
+
+                    trainDiv.innerHTML = `
+                        <h3>${train.name}</h3>
+                        <p><strong>From:</strong> ${train.from} | <strong>To:</strong> ${train.to} | <strong>Departure:</strong> ${train.departure}</p>
+                        <p><strong>Class:</strong> ${cls}</p>
+                        <p><strong>Price:</strong> ₹${train.prices[cls]}</p>
+                        <button class="book-btn">Book</button>
+                    `;
+
+                    trainDiv.querySelector('.book-btn').addEventListener('click', () => {
+                        generatePDF(train, cls);
+                    });
+
+                    trainListDiv.appendChild(trainDiv);
+                });
+            });
+        }
+
+        // Generate PDF with train and class details
+        function generatePDF(train, cls) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(16);
+            doc.text("Railway Booking Confirmation", 20, 20);
+
+            doc.setFontSize(12);
+            doc.text(`Train: ${train.name}`, 20, 40);
+            doc.text(`From: ${train.from}`, 20, 50);
+            doc.text(`To: ${train.to}`, 20, 60);
+            doc.text(`Departure: ${train.departure}`, 20, 70);
+            doc.text(`Class: ${cls}`, 20, 80);
+            doc.text(`Price: ₹${train.prices[cls]}`, 20, 90);
+
+            doc.text("Thank you for booking with RBS!", 20, 110);
+
+            doc.save(`${train.name.replace(/\s+/g, '_')}_${cls}_booking.pdf`);
+        }
+
+        // Initialize page
+        renderTrains();
+    </script>
+</body>
+</html>

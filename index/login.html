@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Railway Booking System</title>
+    <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/train logo.jpg" alt="RBS Logo" />
+            <div class="logo-text">RBS</div>
+        </div>
+    </header>
+    <div class="login-container">
+        <h2>Login</h2>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" />
+        <div class="show-password">
+            <input type="checkbox" id="showPassword" />
+            <label for="showPassword">Show Password</label>
+        </div>
+        <button class="btn" type="button">Login</button>
+    </div>
+    <script>
+        const showPasswordCheckbox = document.getElementById('showPassword');
+        const passwordInput = document.getElementById('password');
+        showPasswordCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+
+        const loginButton = document.querySelector('.btn');
+        loginButton.addEventListener('click', function() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            if (username === '' || password === '') {
+                alert('Please enter both username and password.');
+                return;
+            }
+            // Redirect to booking page if validation passes
+            window.location.href = 'booking.html';
+        });
+    </script>
+</body>
+</html>
